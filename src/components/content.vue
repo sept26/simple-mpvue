@@ -1,11 +1,31 @@
 <template>
   <main class="content">
-    <scroll-view scroll-y style="height:100%" @scrolltolower="toLow" @scrolltoupper="test">
+    <scroll-view scroll-y style="height:100%" @scroll="scrollFn" @scrolltolower="toLow" @scrolltoupper="test">
       <a :href="'/pages/article/main?id='+item.id" class="feed-li"  v-for="(item,index) in list" :key="index">
         <div class="feed-title">
           <!-- <type-block></type-block> -->
-          <p>swipe内容</p>
           <p>{{item.title}}</p>
+        </div>
+        <div class="feed-content">
+          <!-- <img src="" alt=""> -->
+          <div class="feed-right">
+            <div class="feed-right-top">
+              <div class="avatar-name">
+                {{item.author.loginname}}
+              </div>
+              <div class="count">
+                <span>{{item.reply_count}}</span>&nbsp;/&nbsp;{{item.visit_count}}
+              </div>
+            </div>
+            <div class="feed-right-bottom">
+              <div class="feed-time">
+                {{item.createTime}}
+              </div>
+              <div class="feed-pass">
+                {{item.lastReplyTime}}
+              </div>
+            </div>
+          </div>
         </div>
       </a>
     </scroll-view>
@@ -24,6 +44,9 @@ export default {
   },
   props: ['currentTab'],
   methods: {
+    test(){
+      console.log('test')
+    },
     async getList(page = 1) {
       wx.showLoading({
         title: '加载中'
@@ -49,15 +72,18 @@ export default {
       // 这里就是滚动到底部了
       this.page++;
       this.getList(this.page)
-    }
+    },
+    scrollFn(e) {
+    // console.log(e)
+    },
   },
   computed: {
     list() {
       return this.articleList.map(item => {
         delete item.content
-        return Object.assign(item, {createTime:item.createTime, lastReplyTime:item.lastReplyTime
-            // createTime: this.formatTime(item.create_at),
-            // lastReplyTime: this.fromNow(item.last_reply_at),
+        return Object.assign(item, {
+          createTime: this.formatTime(item.create_at),
+          lastReplyTime: this.fromNow(item.last_reply_at)
         })
       })
     }
@@ -67,4 +93,9 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.content {
+  height: 100%;
+}
+</style>
 
