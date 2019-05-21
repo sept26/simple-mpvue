@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import fly from "@/utils/fly";
-import wxp from 'minapp-api-promise';
+import fly from "@/utils/fly"
+import wxp from 'minapp-api-promise'
 import content from '@/components/content'
 import sliderNav from '@/components/slider-nav'
 import {navList} from '@/common/js/basic'
@@ -30,9 +30,21 @@ export default {
     sliderNav,
     contentV: content
   },
-
+  computed: {
+    contentHeight() {
+        return this.winHeight - 50 + 'px'
+    }
+  },
   methods: {
-
+    swiperChange(e) {
+      let {current} = e.target
+      this.currentTab = current
+    }
+  },
+  async onLoad() {
+    let info = await wxp.getSystemInfo()
+    this.winWidth = info.windowWidth
+    this.winHeight = info.windowHeight
   }
 }
 </script>

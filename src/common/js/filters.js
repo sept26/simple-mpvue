@@ -53,13 +53,9 @@ const getTimeInfo = (str) => {
 const filters = {
   install (Vue, val) {
     Vue.prototype.getTopicType = function(val = 'share') {
-      navList.forEach(it => {
-        if (it.type === val) {
-          return it.title
-        }
-      })
-      // return navList[val].title
-      // return listMap[val].title
+     return navList.filter(it => {
+        return it.type === val
+      })[0].title
     }
   }
 }

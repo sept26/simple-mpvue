@@ -3,11 +3,13 @@
     <scroll-view scroll-y style="height:100%" @scroll="scrollFn" @scrolltolower="toLow" @scrolltoupper="test">
       <a :href="'/pages/article/main?id='+item.id" class="feed-li"  v-for="(item,index) in list" :key="index">
         <div class="feed-title">
-          <!-- <type-block></type-block> -->
+          <type-block :item="item"></type-block>
           <p>{{item.title}}</p>
         </div>
         <div class="feed-content">
-          <!-- <img src="" alt=""> -->
+          <div class="feed-left">
+            <avatar :user="item.author"></avatar>
+          </div>
           <div class="feed-right">
             <div class="feed-right-top">
               <div class="avatar-name">
@@ -33,8 +35,8 @@
 </template>
 <script>
 import fly from '@/utils/fly'
-// import typeBlock from '@/components/type-block'
-// import avatar from '@/components/avatar'
+import typeBlock from '@/components/type-block'
+import avatar from '@/components/avatar'
 export default {
   data() {
     return {
@@ -43,6 +45,10 @@ export default {
     }
   },
   props: ['currentTab'],
+  components: {
+    typeBlock,
+    avatar
+  },
   methods: {
     test(){
       console.log('test')
@@ -93,9 +99,54 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .content {
   height: 100%;
+  .feed-title {
+    padding: 10px;
+    display: flex;
+    p {
+      margin-left: 8px;
+      font-size: 18px;
+      line-height: 24px;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+  }
+  .feed-content {
+    display: flex;
+    font-size: 16px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    .feed-left {
+      flex: 1;
+      margin-bottom: 5px;
+    }
+    .feed-right {
+      flex: 5;
+      display: flex;
+      flex-direction: column;
+      .feed-right-top {
+        display: flex;
+        justify-content: space-between;
+        .count {
+          span {
+            color: #80bd01;
+          }
+        }
+      }
+      .feed-right-bottom {
+        display: flex;
+        justify-content: space-between;
+        .feed-time {
+          color: #666;
+        }
+      }
+    }
+  }
 }
 </style>
 
