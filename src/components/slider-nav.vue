@@ -44,9 +44,11 @@ export default {
   computed: {
     style() {
       // 计算左侧剩余宽度 ??
-      let leftWidth = (this.winWidth - this.navList.length * this.navWidth) / 2;
+      // let leftWidth = (this.winWidth - this.navList.length * this.navWidth) / 2;
+      // let width = this.navWidth + 'px';
+      // let left = leftWidth + this.navWidth * this.currentTab + 'px';
       let width = this.navWidth + 'px';
-      let left = leftWidth + this.navWidth * this.currentTab + 'px';
+      let left = this.currentTab * this.navWidth + 'px'
       let style = {
           left,
           width,
@@ -89,12 +91,12 @@ export default {
       color: #777777;
   }
   .block {
-      display: block;
+      display: inline-block;
       position: absolute;
       left: 0;
       height: 2px;
       background: red;
-      bottom: 20px;
+      top: 35px;
       transition: left .2s;
       z-index: 99;
   }
