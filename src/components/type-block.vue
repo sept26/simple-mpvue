@@ -25,11 +25,12 @@ export default {
 .type-block-container {
   div {
     font-size: 14px;
-    height: 20px;
-    line-height: 20px;
+    height: 24px;
+    line-height: 24px;
     text-align: center;
     padding: 0 5px;
     border-radius: 4px;
+    min-width: 40px;
     &.topping {
       background-color: #80bd01;
       color: #fff;

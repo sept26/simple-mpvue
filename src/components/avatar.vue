@@ -11,14 +11,11 @@ export default {
   methods: {
     goUser() {
       wx.navigateTo({
-        url: this.href
+        url: `/pages/user/main?id=${this.user.loginname}`
       })
     }
   },
   computed: {
-    href(){
-      return '/pages/user/main?id='+this.user.loginname;
-    },
     style() {
       if (!this.size) return ''
       else {

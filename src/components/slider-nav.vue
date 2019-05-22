@@ -43,7 +43,6 @@ export default {
   },
   computed: {
     style() {
-      // 计算左侧剩余宽度 ??
       // let leftWidth = (this.winWidth - this.navList.length * this.navWidth) / 2;
       // let width = this.navWidth + 'px';
       // let left = leftWidth + this.navWidth * this.currentTab + 'px';

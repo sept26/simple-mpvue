@@ -1,10 +1,12 @@
 <template>
   <main class="content">
     <scroll-view scroll-y style="height:100%" @scroll="scrollFn" @scrolltolower="toLow" @scrolltoupper="test">
-      <a :href="'/pages/article/main?id='+item.id" class="feed-li"  v-for="(item,index) in list" :key="index">
+      <div class="feed-li"  v-for="(item,index) in list" :key="index">
         <div class="feed-title">
           <type-block :item="item"></type-block>
-          <p>{{item.title}}</p>
+          <a :href="'/pages/article/main?id='+item.id" >
+            <p>{{item.title}}</p>
+          </a>
         </div>
         <div class="feed-content">
           <div class="feed-left">
@@ -29,7 +31,7 @@
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </scroll-view>
   </main>
 </template>
@@ -51,7 +53,7 @@ export default {
   },
   methods: {
     test(){
-      console.log('test')
+
     },
     async getList(page = 1) {
       wx.showLoading({
